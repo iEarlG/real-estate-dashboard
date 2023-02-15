@@ -16,37 +16,42 @@ const Home = () => {
       >
         Dashboard
       </Typography>
-      <Box
-        mt="20px"
-        display="flex"
-        flexWrap="wrap"
-        gap={4}
-      >
-        <PieChart 
-          title="Property for Sale"
-          value={653}
-          series={[ 50, 80, ]}
-          colors={[ '#475BE', '#E4E8EF' ]}
+
+      <Box mt="20px" display="flex" flexWrap="wrap" gap={4}>
+        <PieChart
+          title="Properties for Sale"
+          value={684}
+          series={[75, 25]}
+          colors={["#2ED480", "#FD8539"]}
         />
-        <PieChart 
-          title="Property for Rent"
-          value={152}
-          series={[ 45, 67 ]}
-          colors={[ '#475CA', '#A4A8CA' ]}
+        <PieChart
+          title="Properties for Rent"
+          value={550}
+          series={[60, 40]}
+          colors={["#2ED480", "#475BE8"]}
         />
-        <PieChart 
-          title="Total Customers"
+        <PieChart
+          title="Total Clients"
+          value={5684}
+          series={[75, 25]}
+          colors={["#2ED480", "#FD8539"]}
+        />
+        <PieChart
+          title="Properties for Cities"
           value={223}
-          series={[ 43, 51 ]}
-          colors={[ '#5847C', '#51F4E3' ]}
-        />
-        <PieChart 
-          title="Property for Rent to Own"
-          value={1565}
-          series={[ 65, 76 ]}
-          colors={[ '#805FF', '#G6H6EU' ]}
+          series={[75, 25]}
+          colors={["#2ED480", "#475BE8"]}
         />
       </Box>
+
+      <Stack 
+        mt="25px"
+        width="100%" 
+        direction={{ xs: 'column', lg: 'row', }}
+      >
+        <TotalRevenue />
+        <PropertyReferrals />
+      </Stack>
     </Box>
   )
 }
