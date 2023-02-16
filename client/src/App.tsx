@@ -98,7 +98,7 @@ function App() {
             //   icon: <Dashboard />
             // },
             {
-              name: "property",
+              name: "properties",
               list: AllProperties,
               show: PropertyDetails,
               create: CreateProperty,
@@ -106,18 +106,18 @@ function App() {
               icon: <VillaOutlined />
             },
             {
-              name: "agent",
+              name: "agents",
               list: Agent,
               show: AgentProfile,
               icon: <PeopleAltOutlined />
             },
             {
-              name: "review",
+              name: "reviews",
               list: Home,
               icon: <StarOutlineRounded />
             },
             {
-              name: "message",
+              name: "messages",
               list: Home,
               icon: <ChatBubbleOutline />
             },
