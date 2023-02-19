@@ -91,7 +91,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit,
                 margin: '10px 0',
                 color: '#11142D',
               }}>
-                Select Property Area
+                Property Type
               </FormHelperText>
 
               <Select
@@ -122,7 +122,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit,
               margin: '10px 0',
               color: '#11142D',
             }}>
-              Enter Property Type
+              Property Price
             </FormHelperText>
             <TextField 
               fullWidth
@@ -143,7 +143,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit,
               margin: '10px 0',
               color: '#11142D',
             }}>
-              Enter Property Location
+              Property Location
             </FormHelperText>
             <TextField 
               fullWidth
