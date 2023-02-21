@@ -9,7 +9,7 @@ import { TotalRevenueOptions, TotalRevenueSeries } from "./chart.config";
 const TotalRevenue = () => {
   return (
     <Box
-      id="chart"  
+      id="chart"
       p={4}
       flex={1}
       bgcolor="#FCFCFC"
