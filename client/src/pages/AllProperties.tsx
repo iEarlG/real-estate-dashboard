@@ -1,10 +1,12 @@
 
 import { useTable } from "@pankod/refine-core";
-import { Box, Stack, TextField, Typography, Select, Menu, MenuItem } from "@pankod/refine-mui";
+import { Box, Stack, TextField, Typography, Select, MenuItem } from "@pankod/refine-mui";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 
 import { PropertyCards, CustomBtn } from "components";
+import { useMemo } from "react";
+import { title } from "process";
 
 const AllProperties = () => {
   const navigate = useNavigate();
@@ -13,6 +15,21 @@ const AllProperties = () => {
   current, setCurrent, setPageSize, pageCount, sorter, setSorter, filters, setFilters } = useTable();
 
   const allProperties = data?.data ?? [];
+   
+  const currentPrice = sorter.find((item) => item.field === 'price')?.order;
+  const toggleSort = (field: string) => { 
+    setSorter([{ field, order: currentPrice === 'asc' ? 'desc' : 'asc' }]);
+  }
+
+  const currentFilterValues = useMemo(() => {
+    const logicalFilters = filters.flatMap((item) => 
+    ( 'field' in item ? item : []));
+
+    return { 
+      title: logicalFilters.find((item) => item.field === 'title')?.value || '',
+      propertyType: logicalFilters.find((item) => item.field === 'propertyType')?.value || '',
+    }
+  }, [filters]);
 
   if(isLoading) return <Typography>Loading...</Typography>
   if(isError) return <Typography>Error...</Typography>
@@ -32,8 +49,8 @@ const AllProperties = () => {
           <Box mb={2} mt={3} display="flex" width="85%" justifyContent="space-between" flexWrap="wrap">
             <Box display="flex" gap={2} flexWrap="wrap" mb={{ xs: '20px', sm: 0 }}>
               <CustomBtn 
-                title={`Sort price`}
-                handleClick={() => {}}
+                title={`Sort price ${currentPrice === 'asc' ? '↓' : '↑'}`}
+                handleClick={() => toggleSort('price')}
                 backgroundColor="#2ED480"
                 color="#FCFCFC"
               />
@@ -41,20 +58,45 @@ const AllProperties = () => {
                 variant="outlined"
                 color="info"
                 placeholder="Search by title"
-                value=""
-                onChange={() => {}}
+                value={currentFilterValues.title}
+                onChange={(e) => {
+                  setFilters([
+                    {
+                      field: 'title',
+                      operator: 'contains',
+                      value: e.currentTarget.value ? e.currentTarget.value : undefined,
+                    }
+                  ]);
+                }}
               />
               <Select
                 variant="outlined"
                 color="info"
                 defaultValue=""
-                value=""
+                value={currentFilterValues.propertyType}
                 inputProps={{ 'aria-label' : 'Without label' }}
-                onChange={() => {}}
+                onChange={(e) => {
+                  setFilters([
+                    {
+                      field: 'propertyType',
+                      operator: 'eq',
+                      value: e.target.value
+                    }
+                  ], 'replace');
+                }}
                 displayEmpty
                 required
               >
-                <MenuItem value=" ">All</MenuItem>
+                <MenuItem value="">All</MenuItem>
+                {['Apartment', 'House', 'Office', 'Land', 'Townhouse', 'Condos', 'Farmhouse', 
+                  'Studio', 'Chalet'].map((type) => (
+                  <MenuItem 
+                    key={type}
+                    value={type.toLowerCase()}
+                  >
+                    {type}
+                  </MenuItem>
+                ))}
               </Select>
             </Box>
           </Box>
@@ -122,7 +164,7 @@ const AllProperties = () => {
                 color="info"
                 defaultValue={10}
                 inputProps={{ 'aria-label' : 'Without label' }}
-                onChange={() => {}}
+                onChange={(e) => setPageSize(e.target.value ? Number(e.target.value) : 10)}
                 displayEmpty
                 required
               >
