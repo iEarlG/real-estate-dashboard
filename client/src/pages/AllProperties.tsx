@@ -6,7 +6,6 @@ import { useNavigate } from "@pankod/refine-react-router-v6";
 
 import { PropertyCards, CustomBtn } from "components";
 import { useMemo } from "react";
-import { title } from "process";
 
 const AllProperties = () => {
   const navigate = useNavigate();
