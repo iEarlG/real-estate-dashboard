@@ -6,13 +6,18 @@ import { Box, Typography, Stack } from "@pankod/refine-mui";
 import { AgentCardProp, InfoBarProps } from "interfaces/agent";
 import { EmailOutlined, LocationCity, Phone, Place } from "@mui/icons-material";
 
+function checkImage(url: any) {
+  const img = new Image();
+  img.src = url;
+  return img.width !== 0 && img.height !== 0;
+}
+
 const InfoBar = ({ icon, name }: InfoBarProps) => (
-  <Stack>
+  <Stack flex={1} minWidth={{ xs: "100%", sm: 300 }} gap={1.5} direction="row">
     {icon}
-    <Typography>{name}</Typography>
+    <Typography fontSize={14} color="#808191">{name}</Typography>
   </Stack>
 );
-
 
 const AgentCards = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) => {
   const { data: currentUser } = useGetIdentity();
@@ -20,7 +25,7 @@ const AgentCards = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) 
   const generateLink = () => {
     if(currentUser?.email === email) return '/my-profile'
 
-    return `/agents/show${id}`;
+    return `/agents/show/${id}`;
   }
 
   return (
@@ -38,8 +43,8 @@ const AgentCards = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) 
       }}
     >
       <img 
-        src={avatar} 
-        alt="user" 
+        src={checkImage(avatar) ? avatar : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"} 
+        alt="users" 
         width={90} 
         height={90} 
         style={{ borderRadius: 8, objectFit: 'cover' }} 

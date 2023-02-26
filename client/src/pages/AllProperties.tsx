@@ -45,10 +45,10 @@ const AllProperties = () => {
             {!allProperties.length ? 'Their are no available Properties' : 'All Properties'}
           </Typography>
 
-          <Box mb={2} mt={3} display="flex" width="85%" justifyContent="space-between" flexWrap="wrap">
+          <Box mb={2} mt={3} display="flex" width="84%" justifyContent="space-between" flexWrap="wrap">
             <Box display="flex" gap={2} flexWrap="wrap" mb={{ xs: '20px', sm: 0 }}>
               <CustomBtn 
-                title={`Sort price ${currentPrice === 'asc' ? '↓' : '↑'}`}
+                title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
                 handleClick={() => toggleSort('price')}
                 backgroundColor="#2ED480"
                 color="#FCFCFC"

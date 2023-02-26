@@ -4,7 +4,7 @@ import { FormProps } from 'interfaces/common';
 
 import CustomBtn  from './CustomBtn';
 
-const Form = ({ type, register, onFinish, formLoading, handleSubmit, 
+const Form = ({ type, register, formLoading, handleSubmit, 
     handleImageChange, onFinishHandler, propertyImage, }: FormProps) => {
   return (
     <Box>
@@ -47,7 +47,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit,
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register('title', { required: true })}
+              {...register("title", { required: true })}
             />
           </FormControl>
 

@@ -7,6 +7,19 @@ import { PropertyReferrals, PropertyCards, TopAgents, TotalRevenue, PieChart } f
 
 
 const Home = () => {
+  const { data, isLoading, isError } = useList({
+    resource: 'properties',
+    config: {
+      pagination: {
+        pageSize: 4,
+      }
+    }
+  });
+  const latestProperties = data?.data ?? [];
+
+  if(isLoading) return <div>Loading...</div>
+  if(isError) return <div>Error!!!</div>
+
   return (
     <Box>
       <Typography
@@ -53,6 +66,38 @@ const Home = () => {
         <TotalRevenue />
         <PropertyReferrals />
       </Stack>
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        minWidth="100%"
+        flex={1}
+        mt="25px"
+        padding="20px"
+        borderRadius="15px"
+        bgcolor="#FCFCFC"
+      >
+        <Typography fontSize="18px" fontWeight={600} color="#11142D">Latest Properties</Typography>
+        <Box
+          mt={2.5}
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 4
+          }}
+        >
+          {latestProperties.map((property) => (
+            <PropertyCards 
+              key={property._id}
+              id={property._id}
+              title={property.title}
+              price={property.price}
+              location={property.location}
+              photo={property.photo}
+            />
+          ))}
+        </Box>
+      </Box>
     </Box>
   )
 }
