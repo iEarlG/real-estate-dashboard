@@ -8,7 +8,7 @@ realC is a modern real estate admin dashboard that provides powerful tools for m
 ## Table of contents
 
 - [Introduction](#introduction)
-  - [What is ZipHired](#what-is-real-estate-admin-dashboard)
+  - [What is Real Estate Admin Dashboard](#what-is-real-estate-admin-dashboard)
 - [Overview](#overview)
   - [Screenshot](#screenshot)
   - [Links](#links)
